@@ -104,29 +104,39 @@ class RealTimeClient extends ApiClient
             // Populate self user.
             $this->users[$responseData['self']['id']] = new User($this, $responseData['self']);
 
-            // populate list of users
-            foreach ($responseData['users'] as $data) {
-                $this->users[$data['id']] = new User($this, $data);
+            // populate list of users'
+            if(isset($responseData['users'])){
+                foreach ($responseData['users'] as $data) {
+                    $this->users[$data['id']] = new User($this, $data);
+                }
             }
 
             // populate list of channels
-            foreach ($responseData['channels'] as $data) {
-                $this->channels[$data['id']] = new Channel($this, $data);
+            if(isset($responseData['channels'])){
+                foreach ($responseData['channels'] as $data) {
+                    $this->channels[$data['id']] = new Channel($this, $data);
+                }
             }
 
             // populate list of groups
-            foreach ($responseData['groups'] as $data) {
-                $this->groups[$data['id']] = new Group($this, $data);
+            if(isset($responseData['groups'])){
+                foreach ($responseData['groups'] as $data) {
+                    $this->groups[$data['id']] = new Group($this, $data);
+                }
             }
 
             // populate list of dms
-            foreach ($responseData['ims'] as $data) {
-                $this->dms[$data['id']] = new DirectMessageChannel($this, $data);
+            if(isset($responseData['ims'])){
+                foreach ($responseData['ims'] as $data) {
+                    $this->dms[$data['id']] = new DirectMessageChannel($this, $data);
+                }
             }
 
             // populate list of bots
-            foreach ($responseData['bots'] as $data) {
-                $this->bots[$data['id']] = new Bot($this, $data);
+            if(isset($responseData['bots'])){
+                foreach ($responseData['bots'] as $data) {
+                    $this->bots[$data['id']] = new Bot($this, $data);
+                }
             }
 
             // initiate the websocket connection
